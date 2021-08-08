@@ -27,7 +27,6 @@
         }
 
         return item;
-
     }
 
     function blockContents(block) {

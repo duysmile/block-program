@@ -1,8 +1,6 @@
-(function(global) {
+(function (global) {
     let dragTarget = null;
     let dragType = null;
-    let scriptBlocks = [];
-    let nextBlock = null;
 
     function dragStart(evt) {
         if (!matches(evt.target, '.block')) {
@@ -17,10 +15,6 @@
 
         evt.target.classList.add('dragging');
         dragTarget = evt.target;
-
-        scriptBlocks = [].slice.call(
-            document.querySelectorAll('.script .block:not(.dragging)'),
-        );
 
         evt.dataTransfer.setData('text/html', evt.target.outerHTML);
         if (matches(evt.target, '.menu .block')) {
@@ -47,12 +41,12 @@
         return false;
     }
 
-    function dragEnter(evt){
-        if (matches(evt.target, '.menu, .script, .content')){
+    function dragEnter(evt) {
+        if (matches(evt.target, '.menu, .script, .content')) {
             evt.target.classList.add('over');
             if (evt.preventDefault) { evt.preventDefault(); }// Necessary. Allows us to drop.
-        }else{
-            if (!matches(evt.target, '.menu *, .script *')){
+        } else {
+            if (!matches(evt.target, '.menu *, .script *')) {
                 _findAndRemoveClass('over');
                 evt.target.classList.remove('over');
             }
@@ -114,7 +108,7 @@
         }
     }
 
-    function dragEnd(evt) {
+    function dragEnd(_evt) {
         _findAndRemoveClass('dragging');
         _findAndRemoveClass('over');
         _findAndRemoveClass('next');
@@ -123,7 +117,7 @@
     document.addEventListener('dragstart', dragStart, false);
     document.addEventListener('dragenter', dragEnter, false);
     document.addEventListener('dragover', dragOver, false);
-    document.addEventListener('drag', function(){}, false);
+    document.addEventListener('drag', function () { }, false);
     document.addEventListener('drop', drop, false);
     document.addEventListener('dragend', dragEnd, false);
 })(window);

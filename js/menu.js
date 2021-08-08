@@ -12,7 +12,7 @@
         if (scriptDirty) {
             scriptDirty = false;
             Block.trigger('beforeRun', script);
-            var blocks = [].slice.call(
+            const blocks = [].slice.call(
                 document.querySelectorAll('.script > .block'),
             );
 
